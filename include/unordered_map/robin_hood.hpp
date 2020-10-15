@@ -80,15 +80,26 @@ namespace wiz::robin_hood {
                 storage_type* _value;
             };
 
+#ifdef DEBUG
+            pointer _valid_kv = nullptr;
+#endif
         public:
             WIZ_HIDE_FROM_ABI constexpr _iterator() noexcept
             : _dib{nullptr} {}
 
             WIZ_HIDE_FROM_ABI constexpr reference operator*() const noexcept {
                 assert(_is_full());
+#ifdef DEBUG
+                assert(is_valid()); // invalid iterator
+#endif
                 return policy::indirection(_value);
             }
-            WIZ_HIDE_FROM_ABI constexpr pointer operator->() const noexcept { return policy::addressof(_value); }
+            WIZ_HIDE_FROM_ABI constexpr pointer operator->() const noexcept {
+#ifdef DEBUG
+                assert(is_valid()); // invalid iterator
+#endif
+                return policy::addressof(_value);
+            }
 
             WIZ_HIDE_FROM_ABI constexpr iterator& operator++() noexcept {
                 assert(_is_full());
@@ -112,8 +123,22 @@ namespace wiz::robin_hood {
                 }
                 if (WIZ_UNLIKELY(details::is_end(*_dib))) {
                     _dib = nullptr;
+#ifdef DEBUG
+                    _valid_kv = nullptr;
+#endif
                 }
+#ifdef DEBUG
+                else {
+                    _valid_kv = (_value == nullptr ? nullptr : policy::addressof(_value));
+                }
+#endif
             }
+
+#ifdef DEBUG
+            WIZ_HIDE_FROM_ABI constexpr bool is_valid() const noexcept {
+                return _value == nullptr ? true : _valid_kv == policy::addressof(_value);
+            }
+#endif
 
             WIZ_HIDE_FROM_ABI friend constexpr bool operator==(_iterator const& a, _iterator const& b) noexcept {
                 assert(a._is_valid() || b._is_valid());
@@ -124,7 +149,11 @@ namespace wiz::robin_hood {
         private:
             WIZ_HIDE_FROM_ABI explicit constexpr _iterator(s8* dib, storage_type* value) noexcept
             : _dib(dib)
-            , _value{value} {
+            , _value{value}
+#ifdef DEBUG
+            , _valid_kv{value == nullptr ? nullptr : policy::addressof(value)}
+#endif
+            {
                 __builtin_assume(dib != nullptr);
             }
             WIZ_HIDE_FROM_ABI constexpr bool _is_full() const noexcept { return _dib != nullptr && details::is_full(*_dib); }
@@ -145,7 +174,7 @@ namespace wiz::robin_hood {
             WIZ_HIDE_FROM_ABI constexpr _const_iterator& operator=(_const_iterator const&) noexcept = default;
             WIZ_HIDE_FROM_ABI constexpr _const_iterator& operator=(_const_iterator&&) noexcept = default;
 
-            WIZ_HIDE_FROM_ABI constexpr reference operator*() const { return *_inner; }
+            WIZ_HIDE_FROM_ABI constexpr reference operator*() const { return _inner.operator*(); }
             WIZ_HIDE_FROM_ABI constexpr pointer operator->() const { return _inner.operator->(); }
 
             WIZ_HIDE_FROM_ABI constexpr _const_iterator& operator++() {
@@ -153,6 +182,12 @@ namespace wiz::robin_hood {
                 return *this;
             }
             WIZ_HIDE_FROM_ABI constexpr _const_iterator operator++(int) { return _inner++; }
+
+#ifdef DEBUG
+            WIZ_HIDE_FROM_ABI constexpr bool is_valid() const noexcept {
+                return _inner.is_valid();
+            }
+#endif
 
             WIZ_HIDE_FROM_ABI friend constexpr bool operator==(_const_iterator const& a, _const_iterator const& b) noexcept { return a._inner == b._inner; }
             WIZ_HIDE_FROM_ABI friend constexpr bool operator!=(_const_iterator const& a, _const_iterator const& b) noexcept { return !(a == b); }
@@ -167,6 +202,9 @@ namespace wiz::robin_hood {
     public:
         raw_flat_hash_map() noexcept
         : _metas{details::last_meta<VALUE_PER_BUCKET, META_ALIGN>()}
+#ifdef DEBUG
+        , _values{nullptr}
+#endif
         , _capacity_minus_one{0ul}
         , _size{0ul} {}
         explicit raw_flat_hash_map(size_type new_cap)
@@ -366,6 +404,9 @@ namespace wiz::robin_hood {
 
         convertible_to_iterator erase(const_iterator pos) {
             assert(pos != end());
+#ifdef DEBUG
+            assert(pos.is_valid());
+#endif
             usize current{static_cast<usize>(pos._inner._dib - _metas)};
             _destroy_at(current);
             --_size;
@@ -380,9 +421,13 @@ namespace wiz::robin_hood {
             }
             return convertible_to_iterator{pos._inner._dib, pos._inner._value};
         }
-        iterator erase(const_iterator first, const_iterator last) {
+        convertible_to_iterator erase(const_iterator first, const_iterator last) {
+#ifdef DEBUG
+            assert(first.is_valid());
+            assert(last.is_valid());
+#endif
             if (WIZ_UNLIKELY(first == last)) {
-                return iterator{first._inner._dib, first._inner._value};
+                return convertible_to_iterator{first._inner._dib, first._inner._value};
             }
             usize ind_end{last._inner._dib == nullptr ? (_capacity_minus_one + 1ul) << BIT_OFFSET : static_cast<usize>(last._inner._dib - _metas)};
             usize current{first._inner._dib == nullptr ? (_capacity_minus_one + 1ul) << BIT_OFFSET : static_cast<usize>(first._inner._dib - _metas)};
@@ -394,10 +439,10 @@ namespace wiz::robin_hood {
                 }
             }
             if (WIZ_UNLIKELY(last == end())) {
-                return iterator{last._inner._dib, last._inner._value};
+                return convertible_to_iterator{last._inner._dib, last._inner._value};
             }
             usize num_to_move{wiz::min(static_cast<usize>(*(_metas + ind_end)), static_cast<usize>(last._inner._dib - first._inner._dib))};
-            iterator ret{_iterator_at(ind_end - num_to_move)};
+            convertible_to_iterator ret{_metas + (ind_end - num_to_move), _values + (ind_end - num_to_move)};
             for (usize it{ind_end}; !details::is_at_desired_position(*(_metas + it));) {
                 usize target{it - num_to_move};
                 _placement_new_at(target, *(_metas + it), wiz::move(*(_values + it)));
