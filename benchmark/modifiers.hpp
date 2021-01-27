@@ -16,7 +16,8 @@ namespace wiz {
                 delete data;
             }
             int const sz{static_cast<int>(state.range(0))};
-            data = new T{static_cast<size_t>(sz >> 4)};
+            data = new T{};
+            data->reserve(static_cast<size_t>(sz));
             state.ResumeTiming();
             for (int i = 0; i < sz; ++i) {
                 auto it = data->insert({i, i});

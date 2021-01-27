@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220827B725C1AFD60091E882 /* crn_hash_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B425C1AFD50091E882 /* crn_hash_map.cpp */; };
+		220827B825C1AFD60091E882 /* crn_hash_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B425C1AFD50091E882 /* crn_hash_map.cpp */; };
+		220827B925C1AFD60091E882 /* crn_assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B525C1AFD50091E882 /* crn_assert.cpp */; };
+		220827BA25C1AFD60091E882 /* crn_assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B525C1AFD50091E882 /* crn_assert.cpp */; };
+		220827BB25C1AFD60091E882 /* crn_mem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B625C1AFD60091E882 /* crn_mem.cpp */; };
+		220827BC25C1AFD60091E882 /* crn_mem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827B625C1AFD60091E882 /* crn_mem.cpp */; };
+		220827C825C1B4200091E882 /* crn_platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827C725C1B4200091E882 /* crn_platform.cpp */; };
+		220827C925C1B4200091E882 /* crn_platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827C725C1B4200091E882 /* crn_platform.cpp */; };
+		220827DF25C1B4540091E882 /* crn_vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827DE25C1B4540091E882 /* crn_vector.cpp */; };
+		220827E025C1B4540091E882 /* crn_vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 220827DE25C1B4540091E882 /* crn_vector.cpp */; };
 		221FF55E2478670C0094485D /* hashtablez_sampler.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF55C2478670C0094485D /* hashtablez_sampler.cc */; };
 		221FF55F2478670C0094485D /* hashtablez_sampler.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF55C2478670C0094485D /* hashtablez_sampler.cc */; };
 		221FF5602478670C0094485D /* hashtablez_sampler_force_weak_definition.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF55D2478670C0094485D /* hashtablez_sampler_force_weak_definition.cc */; };
@@ -41,6 +51,10 @@
 		2221BE6022D8B63A00A3098E /* libmacos_google_benchmark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221BDFB22D8AF4000A3098E /* libmacos_google_benchmark.a */; };
 		2221BE7E22D8B6EF00A3098E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2221BE5B22D8B60700A3098E /* main.cpp */; };
 		2221BE8122D8B76D00A3098E /* libios_google_benchmark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221BE3322D8B45500A3098E /* libios_google_benchmark.a */; };
+		224C161125C1A732000E1FF4 /* ios_crunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C161025C1A732000E1FF4 /* ios_crunch.m */; };
+		224C161225C1A732000E1FF4 /* ios_crunch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C160F25C1A732000E1FF4 /* ios_crunch.h */; };
+		224C164B25C1A955000E1FF4 /* libios_crunch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 224C160D25C1A732000E1FF4 /* libios_crunch.a */; };
+		224C165825C1A985000E1FF4 /* libmacos_crunch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 224C162425C1A87B000E1FF4 /* libmacos_crunch.a */; };
 		2273449F2476D570007EA536 /* city.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2273449D2476D570007EA536 /* city.cc */; };
 		227344A02476D570007EA536 /* city.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2273449D2476D570007EA536 /* city.cc */; };
 		227344A12476D570007EA536 /* hash.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2273449E2476D570007EA536 /* hash.cc */; };
@@ -146,6 +160,20 @@
 			remoteGlobalIDString = 2221BE3222D8B45500A3098E;
 			remoteInfo = ios_google_benchmark;
 		};
+		224C164925C1A94D000E1FF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A0675D22D8AD8500420C6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 224C160C25C1A732000E1FF4;
+			remoteInfo = ios_crunch;
+		};
+		224C165625C1A97C000E1FF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22A0675D22D8AD8500420C6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 224C162325C1A87B000E1FF4;
+			remoteInfo = macos_crunch;
+		};
 		227344A32476D584007EA536 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 22A0675D22D8AD8500420C6D /* Project object */;
@@ -190,6 +218,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		224C160B25C1A732000E1FF4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				224C161225C1A732000E1FF4 /* ios_crunch.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		227344922476C7E8007EA536 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,6 +240,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		220827B425C1AFD50091E882 /* crn_hash_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crn_hash_map.cpp; path = ../lib/crunch/crnlib/crn_hash_map.cpp; sourceTree = "<group>"; };
+		220827B525C1AFD50091E882 /* crn_assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crn_assert.cpp; path = ../lib/crunch/crnlib/crn_assert.cpp; sourceTree = "<group>"; };
+		220827B625C1AFD60091E882 /* crn_mem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crn_mem.cpp; path = ../lib/crunch/crnlib/crn_mem.cpp; sourceTree = "<group>"; };
+		220827C725C1B4200091E882 /* crn_platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crn_platform.cpp; path = ../lib/crunch/crnlib/crn_platform.cpp; sourceTree = "<group>"; };
+		220827DE25C1B4540091E882 /* crn_vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crn_vector.cpp; path = ../lib/crunch/crnlib/crn_vector.cpp; sourceTree = "<group>"; };
 		221B71E424768878006D0687 /* rehash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rehash.hpp; sourceTree = "<group>"; };
 		221FF55C2478670C0094485D /* hashtablez_sampler.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hashtablez_sampler.cc; path = ../lib/abseil/absl/container/internal/hashtablez_sampler.cc; sourceTree = "<group>"; };
 		221FF55D2478670C0094485D /* hashtablez_sampler_force_weak_definition.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hashtablez_sampler_force_weak_definition.cc; path = ../lib/abseil/absl/container/internal/hashtablez_sampler_force_weak_definition.cc; sourceTree = "<group>"; };
@@ -227,6 +270,10 @@
 		2221BE8622D8B79800A3098E /* ios_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2221BEA622D8B8F500A3098E /* macos_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = macos_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		222C910824740B1500FEED58 /* equal_to.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = equal_to.hpp; sourceTree = "<group>"; };
+		224C160D25C1A732000E1FF4 /* libios_crunch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libios_crunch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		224C160F25C1A732000E1FF4 /* ios_crunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_crunch.h; sourceTree = "<group>"; };
+		224C161025C1A732000E1FF4 /* ios_crunch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ios_crunch.m; sourceTree = "<group>"; };
+		224C162425C1A87B000E1FF4 /* libmacos_crunch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmacos_crunch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		226D0C1C247A831E008E1BD2 /* get_random.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = get_random.hpp; sourceTree = "<group>"; };
 		2273448C2476C0D4007EA536 /* libmacos_abseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmacos_abseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		227344942476C7E8007EA536 /* libios_abseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libios_abseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +376,7 @@
 			files = (
 				221FF5742478694D0094485D /* CoreFoundation.framework in Frameworks */,
 				227344A52476D591007EA536 /* libmacos_abseil.a in Frameworks */,
+				224C165825C1A985000E1FF4 /* libmacos_crunch.a in Frameworks */,
 				2221BE6022D8B63A00A3098E /* libmacos_google_benchmark.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +387,7 @@
 			files = (
 				221FF572247869430094485D /* CoreFoundation.framework in Frameworks */,
 				227344A82476D5B9007EA536 /* libios_abseil.a in Frameworks */,
+				224C164B25C1A955000E1FF4 /* libios_crunch.a in Frameworks */,
 				2221BE8122D8B76D00A3098E /* libios_google_benchmark.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +400,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2221BEA322D8B8F500A3098E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		224C160A25C1A732000E1FF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		224C162225C1A87B000E1FF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -385,6 +448,8 @@
 				2221BEA622D8B8F500A3098E /* macos_test */,
 				2273448C2476C0D4007EA536 /* libmacos_abseil.a */,
 				227344942476C7E8007EA536 /* libios_abseil.a */,
+				224C160D25C1A732000E1FF4 /* libios_crunch.a */,
+				224C162425C1A87B000E1FF4 /* libmacos_crunch.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -392,6 +457,7 @@
 		2221BE0722D8AF7400A3098E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				224C161F25C1A7D4000E1FF4 /* crunch */,
 				227344872476C057007EA536 /* abseil */,
 				2221BE0822D8AF8200A3098E /* google_benchmark */,
 			);
@@ -469,6 +535,27 @@
 				22DEE61924687CD100C8596D /* unordered_map */,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		224C160E25C1A732000E1FF4 /* ios_crunch */ = {
+			isa = PBXGroup;
+			children = (
+				224C160F25C1A732000E1FF4 /* ios_crunch.h */,
+				224C161025C1A732000E1FF4 /* ios_crunch.m */,
+			);
+			path = ios_crunch;
+			sourceTree = "<group>";
+		};
+		224C161F25C1A7D4000E1FF4 /* crunch */ = {
+			isa = PBXGroup;
+			children = (
+				220827B525C1AFD50091E882 /* crn_assert.cpp */,
+				220827B425C1AFD50091E882 /* crn_hash_map.cpp */,
+				220827B625C1AFD60091E882 /* crn_mem.cpp */,
+				220827C725C1B4200091E882 /* crn_platform.cpp */,
+				220827DE25C1B4540091E882 /* crn_vector.cpp */,
+			);
+			name = crunch;
 			sourceTree = "<group>";
 		};
 		226D0C1B247A8303008E1BD2 /* helper */ = {
@@ -555,6 +642,7 @@
 				2221BE5A22D8B5F300A3098E /* benchmark */,
 				2221BE9F22D8B7DF00A3098E /* test */,
 				2221BE0722D8AF7400A3098E /* lib */,
+				224C160E25C1A732000E1FF4 /* ios_crunch */,
 				2221BE5F22D8B63A00A3098E /* Frameworks */,
 				2221BDFC22D8AF4000A3098E /* Products */,
 			);
@@ -625,6 +713,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		224C162025C1A87B000E1FF4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		227344882476C0D4007EA536 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -681,6 +776,7 @@
 			);
 			dependencies = (
 				227344A42476D584007EA536 /* PBXTargetDependency */,
+				224C165725C1A97C000E1FF4 /* PBXTargetDependency */,
 				2221BE5E22D8B63300A3098E /* PBXTargetDependency */,
 			);
 			name = macos_benchmark;
@@ -699,6 +795,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				224C164A25C1A94D000E1FF4 /* PBXTargetDependency */,
 				227344A72476D5B1007EA536 /* PBXTargetDependency */,
 				2221BE8022D8B76600A3098E /* PBXTargetDependency */,
 			);
@@ -741,6 +838,40 @@
 			productReference = 2221BEA622D8B8F500A3098E /* macos_test */;
 			productType = "com.apple.product-type.tool";
 		};
+		224C160C25C1A732000E1FF4 /* ios_crunch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 224C161525C1A732000E1FF4 /* Build configuration list for PBXNativeTarget "ios_crunch" */;
+			buildPhases = (
+				224C160925C1A732000E1FF4 /* Sources */,
+				224C160A25C1A732000E1FF4 /* Frameworks */,
+				224C160B25C1A732000E1FF4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ios_crunch;
+			productName = ios_crunch;
+			productReference = 224C160D25C1A732000E1FF4 /* libios_crunch.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		224C162325C1A87B000E1FF4 /* macos_crunch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 224C162525C1A87B000E1FF4 /* Build configuration list for PBXNativeTarget "macos_crunch" */;
+			buildPhases = (
+				224C162025C1A87B000E1FF4 /* Headers */,
+				224C162125C1A87B000E1FF4 /* Sources */,
+				224C162225C1A87B000E1FF4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = macos_crunch;
+			productName = macos_crunch;
+			productReference = 224C162425C1A87B000E1FF4 /* libmacos_crunch.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		2273448B2476C0D4007EA536 /* macos_abseil */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2273448D2476C0D4007EA536 /* Build configuration list for PBXNativeTarget "macos_abseil" */;
@@ -781,7 +912,7 @@
 		22A0675D22D8AD8500420C6D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					2221BDFA22D8AF4000A3098E = {
 						CreatedOnToolsVersion = 11.0;
@@ -800,6 +931,12 @@
 					};
 					2221BEA522D8B8F500A3098E = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					224C160C25C1A732000E1FF4 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					224C162325C1A87B000E1FF4 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 					2273448B2476C0D4007EA536 = {
 						CreatedOnToolsVersion = 11.5;
@@ -830,6 +967,8 @@
 				2221BE8522D8B79800A3098E /* ios_test */,
 				2273448B2476C0D4007EA536 /* macos_abseil */,
 				227344932476C7E8007EA536 /* ios_abseil */,
+				224C162325C1A87B000E1FF4 /* macos_crunch */,
+				224C160C25C1A732000E1FF4 /* ios_crunch */,
 			);
 		};
 /* End PBXProject section */
@@ -946,6 +1085,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		224C160925C1A732000E1FF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220827C925C1B4200091E882 /* crn_platform.cpp in Sources */,
+				220827B825C1AFD60091E882 /* crn_hash_map.cpp in Sources */,
+				220827BC25C1AFD60091E882 /* crn_mem.cpp in Sources */,
+				224C161125C1A732000E1FF4 /* ios_crunch.m in Sources */,
+				220827E025C1B4540091E882 /* crn_vector.cpp in Sources */,
+				220827BA25C1AFD60091E882 /* crn_assert.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		224C162125C1A87B000E1FF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220827C825C1B4200091E882 /* crn_platform.cpp in Sources */,
+				220827DF25C1B4540091E882 /* crn_vector.cpp in Sources */,
+				220827B725C1AFD60091E882 /* crn_hash_map.cpp in Sources */,
+				220827BB25C1AFD60091E882 /* crn_mem.cpp in Sources */,
+				220827B925C1AFD60091E882 /* crn_assert.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		227344892476C0D4007EA536 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1036,6 +1200,16 @@
 			isa = PBXTargetDependency;
 			target = 2221BE3222D8B45500A3098E /* ios_google_benchmark */;
 			targetProxy = 2221BE7F22D8B76600A3098E /* PBXContainerItemProxy */;
+		};
+		224C164A25C1A94D000E1FF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 224C160C25C1A732000E1FF4 /* ios_crunch */;
+			targetProxy = 224C164925C1A94D000E1FF4 /* PBXContainerItemProxy */;
+		};
+		224C165725C1A97C000E1FF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 224C162325C1A87B000E1FF4 /* macos_crunch */;
+			targetProxy = 224C165625C1A97C000E1FF4 /* PBXContainerItemProxy */;
 		};
 		227344A42476D584007EA536 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1128,6 +1302,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../lib\"",
 					"\"$(SRCROOT)/../lib/abseil\"",
+					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1150,6 +1325,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../lib\"",
 					"\"$(SRCROOT)/../lib/abseil\"",
+					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1171,6 +1347,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../lib\"",
 					"\"$(SRCROOT)/../lib/abseil\"",
+					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				INFOPLIST_FILE = ios_benchmark/Info.plist;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1195,6 +1372,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../lib\"",
 					"\"$(SRCROOT)/../lib/abseil\"",
+					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				INFOPLIST_FILE = ios_benchmark/Info.plist;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1306,6 +1484,68 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		224C161325C1A732000E1FF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EA7S9957EF;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		224C161425C1A732000E1FF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EA7S9957EF;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		224C162625C1A87B000E1FF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EA7S9957EF;
+				EXECUTABLE_PREFIX = lib;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		224C162725C1A87B000E1FF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EA7S9957EF;
+				EXECUTABLE_PREFIX = lib;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -1434,7 +1674,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -1521,7 +1761,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				SUPPORTS_UIKITFORMAC = NO;
@@ -1595,6 +1835,24 @@
 			buildConfigurations = (
 				2221BEAB22D8B8F500A3098E /* Debug */,
 				2221BEAC22D8B8F500A3098E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		224C161525C1A732000E1FF4 /* Build configuration list for PBXNativeTarget "ios_crunch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				224C161325C1A732000E1FF4 /* Debug */,
+				224C161425C1A732000E1FF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		224C162525C1A87B000E1FF4 /* Build configuration list for PBXNativeTarget "macos_crunch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				224C162625C1A87B000E1FF4 /* Debug */,
+				224C162725C1A87B000E1FF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
