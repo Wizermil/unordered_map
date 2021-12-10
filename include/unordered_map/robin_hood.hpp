@@ -12,6 +12,7 @@
 #include "unordered_map/details/memory/addressof.hpp"
 #include "unordered_map/details/meta.hpp"
 #include "unordered_map/details/min.hpp"
+#include "unordered_map/details/max.hpp"
 #include "unordered_map/details/policy_traits.hpp"
 #include "unordered_map/details/type.hpp"
 #include "unordered_map/details/utility/forward.hpp"
@@ -48,6 +49,7 @@ namespace wiz::robin_hood {
         WIZ_HIDE_FROM_ABI static constexpr usize const META_ALIGN{16ul};
         WIZ_HIDE_FROM_ABI static constexpr usize const VALUE_PER_BUCKET{
             details::next_aligned(details::next_aligned(1ul, alignof(storage_type) - 1ul), META_ALIGN - 1ul)};
+        WIZ_HIDE_FROM_ABI static constexpr s8 const SEEK_MAX{32};
         WIZ_HIDE_FROM_ABI static constexpr usize const MASK{VALUE_PER_BUCKET - 1ul};
         WIZ_HIDE_FROM_ABI static constexpr usize const BIT_OFFSET{__builtin_popcount(MASK)};
         WIZ_HIDE_FROM_ABI static constexpr usize const SIZEOF_VALUE{details::next_aligned(sizeof(storage_type), alignof(storage_type) - 1ul)};
@@ -288,7 +290,7 @@ namespace wiz::robin_hood {
 
         iterator find(key_type const& key) {
             usize index{_index_for_hash(hasher{}(key))};
-            for (s8 distance{0}; *(_metas + index) >= distance; ++index, ++distance) {
+            for (s8 distance{0}; distance < SEEK_MAX && *(_metas + index) >= distance; ++index, ++distance) {
                 if (policy::equal(key, _values + index)) {
                     return _iterator_at(index);
                 }
@@ -487,7 +489,7 @@ namespace wiz::robin_hood {
 
         float load_factor() const {
             if (WIZ_LIKELY(_is_init())) {
-                return static_cast<float>(_size) / (_capacity_minus_one + 1ul);
+                return static_cast<float>(_size) / ((_capacity_minus_one + 1ul) << BIT_OFFSET);
             } else {
                 return 0.f;
             }
@@ -548,7 +550,7 @@ namespace wiz::robin_hood {
         WIZ_HIDE_FROM_ABI WIZ_NOINLINE pair<iterator, bool> _emplace(Key&& key, Args&&... args) noexcept {
             usize index{_index_for_hash(policy::hash(key))};
             s8 distance{0};
-            for (; *(_metas + index) >= distance; ++distance, ++index) {
+            for (; distance < SEEK_MAX && *(_metas + index) >= distance; ++distance, ++index) {
                 if (policy::equal(key, *(_values + index))) {
                     return {_iterator_at(index), false};
                 }
@@ -563,12 +565,8 @@ namespace wiz::robin_hood {
                 _placement_new_at(index, distance_from_desired, wiz::forward<Key>(key), wiz::forward<Args>(args)...);
                 ++_size;
                 return {_iterator_at(index), true};
-            } else if (details::is_end(*(_metas + index)) || distance_from_desired == (VALUE_PER_BUCKET << 1ul)) {
-                if (WIZ_LIKELY(_is_init())) {
-                    _grow((_capacity_minus_one + 1ul) << 1ul);
-                } else {
-                    _grow(1ul);
-                }
+            } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
+                _grow(wiz::max(1ul, (_capacity_minus_one + 1ul) << 1ul));
                 return _emplace(wiz::forward<Key>(key), wiz::forward<Args>(args)...);
             }
 
@@ -584,13 +582,9 @@ namespace wiz::robin_hood {
                     _placement_new_at(index, distance_from_desired, wiz::move(to_insert));
                     ++_size;
                     return {_iterator_at(result), true};
-                } else if (details::is_end(*(_metas + index)) || distance_from_desired == (VALUE_PER_BUCKET << 1ul)) {
+                } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
                     wiz::swap(to_insert, *(_values + result));
-                    if (WIZ_LIKELY(_is_init())) {
-                        _grow((_capacity_minus_one + 1ul) << 1ul);
-                    } else {
-                        _grow(1ul);
-                    }
+                    _grow(wiz::max(1ul, (_capacity_minus_one + 1ul) << 1ul));
                     return _emplace(wiz::move(to_insert));
                 } else if (*(_metas + index) < distance_from_desired) {
                     wiz::swap(distance_from_desired, *(_metas + index));
