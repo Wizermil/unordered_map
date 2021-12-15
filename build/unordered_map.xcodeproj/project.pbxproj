@@ -31,8 +31,6 @@
 		221FF56D247868360094485D /* int128.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF56B247868360094485D /* int128.cc */; };
 		221FF56F247868A80094485D /* time_zone_lookup.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF56E247868A80094485D /* time_zone_lookup.cc */; };
 		221FF570247868A80094485D /* time_zone_lookup.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF56E247868A80094485D /* time_zone_lookup.cc */; };
-		221FF572247869430094485D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221FF571247869430094485D /* CoreFoundation.framework */; };
-		221FF5742478694D0094485D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221FF5732478694C0094485D /* CoreFoundation.framework */; };
 		221FF576247869920094485D /* time_zone_fixed.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF575247869920094485D /* time_zone_fixed.cc */; };
 		221FF577247869920094485D /* time_zone_fixed.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF575247869920094485D /* time_zone_fixed.cc */; };
 		221FF579247869DB0094485D /* time_zone_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 221FF578247869DB0094485D /* time_zone_impl.cc */; };
@@ -51,6 +49,8 @@
 		2221BE6022D8B63A00A3098E /* libmacos_google_benchmark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221BDFB22D8AF4000A3098E /* libmacos_google_benchmark.a */; };
 		2221BE7E22D8B6EF00A3098E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2221BE5B22D8B60700A3098E /* main.cpp */; };
 		2221BE8122D8B76D00A3098E /* libios_google_benchmark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221BE3322D8B45500A3098E /* libios_google_benchmark.a */; };
+		222EBCD82760CF30006F230F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222EBCD72760CF30006F230F /* Foundation.framework */; };
+		222EBCDE2760EAF2006F230F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222EBCDD2760EAF2006F230F /* Foundation.framework */; };
 		224C161125C1A732000E1FF4 /* ios_crunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C161025C1A732000E1FF4 /* ios_crunch.m */; };
 		224C161225C1A732000E1FF4 /* ios_crunch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C160F25C1A732000E1FF4 /* ios_crunch.h */; };
 		224C164B25C1A955000E1FF4 /* libios_crunch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 224C160D25C1A732000E1FF4 /* libios_crunch.a */; };
@@ -137,6 +137,8 @@
 		228C796824813617006A7CF9 /* json_reporter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228C794224813617006A7CF9 /* json_reporter.cc */; };
 		228CC169246CADFC00BFED85 /* construct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228CC168246CADFC00BFED85 /* construct.cpp */; };
 		228CC16A246CADFC00BFED85 /* construct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228CC168246CADFC00BFED85 /* construct.cpp */; };
+		228F9724274F8DD900AA9E2B /* fuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228F9723274F8DD900AA9E2B /* fuzz.cpp */; };
+		228F9725274F8DD900AA9E2B /* fuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228F9723274F8DD900AA9E2B /* fuzz.cpp */; };
 		2292E7BD247C4B69005B9ACF /* modifiers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2292E7BC247C4B69005B9ACF /* modifiers.cpp */; };
 		2292E7BE247C4B69005B9ACF /* modifiers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2292E7BC247C4B69005B9ACF /* modifiers.cpp */; };
 		2292E7C1247C7E58005B9ACF /* iterators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2292E7C0247C7DAF005B9ACF /* iterators.cpp */; };
@@ -145,6 +147,8 @@
 		22C7056D26A06718009D9554 /* raw_hash_set.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22C7056926A066DC009D9554 /* raw_hash_set.cc */; };
 		22D2470426A06AB300BE8523 /* perf_counters.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22D2470326A06AB300BE8523 /* perf_counters.cc */; };
 		22D2470526A06AB300BE8523 /* perf_counters.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22D2470326A06AB300BE8523 /* perf_counters.cc */; };
+		22DE2606275E11C600AE9C0B /* get_random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22DE2605275E11C600AE9C0B /* get_random.cpp */; };
+		22DE2607275E11C600AE9C0B /* get_random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22DE2605275E11C600AE9C0B /* get_random.cpp */; };
 		22DEE61C24687E0200C8596D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE61B24687E0200C8596D /* main.cpp */; };
 		22DEE61D24687E0200C8596D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE61B24687E0200C8596D /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -257,8 +261,6 @@
 		221FF568247868000094485D /* symbolize.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = symbolize.cc; path = ../lib/abseil/absl/debugging/symbolize.cc; sourceTree = "<group>"; };
 		221FF56B247868360094485D /* int128.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = int128.cc; path = ../lib/abseil/absl/numeric/int128.cc; sourceTree = "<group>"; };
 		221FF56E247868A80094485D /* time_zone_lookup.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = time_zone_lookup.cc; path = ../lib/abseil/absl/time/internal/cctz/src/time_zone_lookup.cc; sourceTree = "<group>"; };
-		221FF571247869430094485D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.5.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		221FF5732478694C0094485D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		221FF575247869920094485D /* time_zone_fixed.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = time_zone_fixed.cc; path = ../lib/abseil/absl/time/internal/cctz/src/time_zone_fixed.cc; sourceTree = "<group>"; };
 		221FF578247869DB0094485D /* time_zone_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = time_zone_impl.cc; path = ../lib/abseil/absl/time/internal/cctz/src/time_zone_impl.cc; sourceTree = "<group>"; };
 		221FF57B24786A250094485D /* time_zone_if.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = time_zone_if.cc; path = ../lib/abseil/absl/time/internal/cctz/src/time_zone_if.cc; sourceTree = "<group>"; };
@@ -274,6 +276,8 @@
 		2221BE8622D8B79800A3098E /* ios_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2221BEA622D8B8F500A3098E /* macos_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = macos_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		222C910824740B1500FEED58 /* equal_to.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = equal_to.hpp; sourceTree = "<group>"; };
+		222EBCD72760CF30006F230F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		222EBCDD2760EAF2006F230F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		224C160D25C1A732000E1FF4 /* libios_crunch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libios_crunch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		224C160F25C1A732000E1FF4 /* ios_crunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_crunch.h; sourceTree = "<group>"; };
 		224C161025C1A732000E1FF4 /* ios_crunch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ios_crunch.m; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 		228CC168246CADFC00BFED85 /* construct.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = construct.cpp; sourceTree = "<group>"; };
 		228DBD7D24707749001FFA8C /* hash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
 		228E74222473ED1A006B2D88 /* lookup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lookup.hpp; sourceTree = "<group>"; };
+		228F9723274F8DD900AA9E2B /* fuzz.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fuzz.cpp; sourceTree = "<group>"; };
 		2292E7BC247C4B69005B9ACF /* modifiers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = modifiers.cpp; sourceTree = "<group>"; };
 		2292E7BF247C5477005B9ACF /* modifiers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modifiers.hpp; sourceTree = "<group>"; };
 		2292E7C0247C7DAF005B9ACF /* iterators.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = iterators.cpp; sourceTree = "<group>"; };
@@ -356,9 +361,17 @@
 		22D173BF249B7FE500E75555 /* meta.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = meta.hpp; sourceTree = "<group>"; };
 		22D173C0249B91D600E75555 /* align_helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = align_helper.hpp; sourceTree = "<group>"; };
 		22D2470326A06AB300BE8523 /* perf_counters.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = perf_counters.cc; path = ../lib/benchmark/src/perf_counters.cc; sourceTree = "<group>"; };
+		22DE2605275E11C600AE9C0B /* get_random.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = get_random.cpp; sourceTree = "<group>"; };
+		22DE2608275E259A00AE9C0B /* max.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = max.hpp; sourceTree = "<group>"; };
 		22DEE61B24687E0200C8596D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		22E8FDD827638BD2006A51AF /* fastmod.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fastmod.hpp; sourceTree = "<group>"; };
+		22E8FDD92763C226006A51AF /* robin_hood_dense.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = robin_hood_dense.hpp; sourceTree = "<group>"; };
+		22E8FDDB2763C5A4006A51AF /* mix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mix.hpp; sourceTree = "<group>"; };
 		22EB7D0C249A0D7600AB5E7F /* addressof.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = addressof.hpp; sourceTree = "<group>"; };
 		22EB7D0D249AA47D00AB5E7F /* is_same.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = is_same.hpp; sourceTree = "<group>"; };
+		22F9EAE7276235F300A7F58F /* prime.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = prime.hpp; sourceTree = "<group>"; };
+		22F9EAE827623B1800A7F58F /* lower_bound.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = lower_bound.hpp; sourceTree = "<group>"; };
+		22F9EAEA27623B7400A7F58F /* less.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = less.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,7 +393,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221FF5742478694D0094485D /* CoreFoundation.framework in Frameworks */,
+				222EBCDE2760EAF2006F230F /* Foundation.framework in Frameworks */,
 				227344A52476D591007EA536 /* libmacos_abseil.a in Frameworks */,
 				224C165825C1A985000E1FF4 /* libmacos_crunch.a in Frameworks */,
 				2221BE6022D8B63A00A3098E /* libmacos_google_benchmark.a in Frameworks */,
@@ -391,7 +404,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221FF572247869430094485D /* CoreFoundation.framework in Frameworks */,
+				222EBCD82760CF30006F230F /* Foundation.framework in Frameworks */,
 				227344A82476D5B9007EA536 /* libios_abseil.a in Frameworks */,
 				224C164B25C1A955000E1FF4 /* libios_crunch.a in Frameworks */,
 				2221BE8122D8B76D00A3098E /* libios_google_benchmark.a in Frameworks */,
@@ -500,13 +513,14 @@
 		2221BE5A22D8B5F300A3098E /* benchmark */ = {
 			isa = PBXGroup;
 			children = (
-				226D0C1B247A8303008E1BD2 /* helper */,
-				2221BE5B22D8B60700A3098E /* main.cpp */,
 				228CC165246C9B0700BFED85 /* constructor.hpp */,
-				2292E7BF247C5477005B9ACF /* modifiers.hpp */,
-				228E74222473ED1A006B2D88 /* lookup.hpp */,
-				221B71E424768878006D0687 /* rehash.hpp */,
+				226D0C1B247A8303008E1BD2 /* helper */,
 				2296E0D7247D3E5E0080C71E /* iterators.hpp */,
+				228E74222473ED1A006B2D88 /* lookup.hpp */,
+				2221BE5B22D8B60700A3098E /* main.cpp */,
+				22E8FDDB2763C5A4006A51AF /* mix.hpp */,
+				2292E7BF247C5477005B9ACF /* modifiers.hpp */,
+				221B71E424768878006D0687 /* rehash.hpp */,
 			);
 			name = benchmark;
 			path = ../benchmark;
@@ -515,8 +529,8 @@
 		2221BE5F22D8B63A00A3098E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				221FF5732478694C0094485D /* CoreFoundation.framework */,
-				221FF571247869430094485D /* CoreFoundation.framework */,
+				222EBCDD2760EAF2006F230F /* Foundation.framework */,
+				222EBCD72760CF30006F230F /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -531,6 +545,7 @@
 				2292E7BC247C4B69005B9ACF /* modifiers.cpp */,
 				228BA233248A3FA4003E3E54 /* nat.cpp */,
 				228BA232248A3D3E003E3E54 /* nat.hpp */,
+				228F9723274F8DD900AA9E2B /* fuzz.cpp */,
 			);
 			name = test;
 			path = ../test;
@@ -569,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				226D0C1C247A831E008E1BD2 /* get_random.hpp */,
+				22DE2605275E11C600AE9C0B /* get_random.cpp */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -631,11 +647,15 @@
 				22D173C0249B91D600E75555 /* align_helper.hpp */,
 				22C584172475567B00954C19 /* bit */,
 				228CC166246CA05300BFED85 /* config.hpp */,
+				22E8FDD827638BD2006A51AF /* fastmod.hpp */,
+				22F9EAE927623B6800A7F58F /* functional */,
+				22DE2608275E259A00AE9C0B /* max.hpp */,
 				22C142202475708A00B9FBD4 /* memalign.hpp */,
 				22EB7D0B249A0D6500AB5E7F /* memory */,
 				22D173BF249B7FE500E75555 /* meta.hpp */,
 				2289FA8E248F8F6800AAD996 /* min.hpp */,
 				22D173BC249B73A000E75555 /* policy_traits.hpp */,
+				22F9EAE7276235F300A7F58F /* prime.hpp */,
 				22B8C7DC24829E3D001D93CA /* type_traits */,
 				22B8C7DB24829C82001D93CA /* type.hpp */,
 				228C1DD42484FFA800DA1E40 /* utility */,
@@ -685,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				22D173BE249B7EF000E75555 /* fill.hpp */,
+				22F9EAE827623B1800A7F58F /* lower_bound.hpp */,
 			);
 			path = algorithm;
 			sourceTree = "<group>";
@@ -693,11 +714,12 @@
 			isa = PBXGroup;
 			children = (
 				228CC15F246C906000BFED85 /* details */,
-				228DBD7D24707749001FFA8C /* hash.hpp */,
-				228CC163246C944600BFED85 /* pair.hpp */,
 				222C910824740B1500FEED58 /* equal_to.hpp */,
-				22B8C7DA24829C3E001D93CA /* robin_hood.hpp */,
+				228DBD7D24707749001FFA8C /* hash.hpp */,
 				22D173BB249B737300E75555 /* linear_probing.hpp */,
+				228CC163246C944600BFED85 /* pair.hpp */,
+				22E8FDD92763C226006A51AF /* robin_hood_dense.hpp */,
+				22B8C7DA24829C3E001D93CA /* robin_hood.hpp */,
 			);
 			name = unordered_map;
 			path = ../include/unordered_map;
@@ -709,6 +731,14 @@
 				22EB7D0C249A0D7600AB5E7F /* addressof.hpp */,
 			);
 			path = memory;
+			sourceTree = "<group>";
+		};
+		22F9EAE927623B6800A7F58F /* functional */ = {
+			isa = PBXGroup;
+			children = (
+				22F9EAEA27623B7400A7F58F /* less.hpp */,
+			);
+			path = functional;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1058,6 +1088,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2221BE5C22D8B60700A3098E /* main.cpp in Sources */,
+				22DE2606275E11C600AE9C0B /* get_random.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1097,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2221BE7E22D8B6EF00A3098E /* main.cpp in Sources */,
+				22DE2607275E11C600AE9C0B /* get_random.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1078,6 +1110,7 @@
 				2292E7C2247C7E59005B9ACF /* iterators.cpp in Sources */,
 				228BA235248A3FA4003E3E54 /* nat.cpp in Sources */,
 				228BA23C248AA005003E3E54 /* lookup.cpp in Sources */,
+				228F9725274F8DD900AA9E2B /* fuzz.cpp in Sources */,
 				228CC16A246CADFC00BFED85 /* construct.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1091,6 +1124,7 @@
 				2292E7C1247C7E58005B9ACF /* iterators.cpp in Sources */,
 				228BA234248A3FA4003E3E54 /* nat.cpp in Sources */,
 				228BA23B248AA005003E3E54 /* lookup.cpp in Sources */,
+				228F9724274F8DD900AA9E2B /* fuzz.cpp in Sources */,
 				228CC169246CADFC00BFED85 /* construct.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,6 +1341,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1330,6 +1365,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1655,7 +1691,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
-				"CLANG_X86_VECTOR_INSTRUCTIONS[sdk=macosx*]" = "arch=native";
+				"CLANG_X86_VECTOR_INSTRUCTIONS[arch=i386]" = "arch=native";
+				"CLANG_X86_VECTOR_INSTRUCTIONS[arch=x86_64]" = "arch=native";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1742,7 +1779,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
-				"CLANG_X86_VECTOR_INSTRUCTIONS[sdk=macosx*]" = "arch=native";
+				"CLANG_X86_VECTOR_INSTRUCTIONS[arch=i386]" = "arch=native";
+				"CLANG_X86_VECTOR_INSTRUCTIONS[arch=x86_64]" = "arch=native";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1751,7 +1789,7 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;

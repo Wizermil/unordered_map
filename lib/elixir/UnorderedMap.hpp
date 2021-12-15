@@ -420,7 +420,7 @@ namespace elixir {
 
         size_t bucketCount() const { return _buckets.size(); }
 
-        float loadFactor() const { return size() / bucketCount(); }
+        float load_factor() const { return 1.f; }
 
     private:
         Entry* findEntry(const KeyType& key) const {

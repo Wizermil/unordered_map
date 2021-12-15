@@ -9,3 +9,5 @@
 
 #define WIZ_LIKELY(exp) (__builtin_expect(false || (exp), true))
 #define WIZ_UNLIKELY(exp) (__builtin_expect(exp, false))
+
+#define WIZ_DISABLE_UBSAN_UNSIGNED_INTEGER_CHECK __attribute__((__no_sanitize__("unsigned-integer-overflow")))

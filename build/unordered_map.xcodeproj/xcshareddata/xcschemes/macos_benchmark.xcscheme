@@ -61,7 +61,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--benchmark_repetitions=100"
+            argument = "--benchmark_repetitions=1"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

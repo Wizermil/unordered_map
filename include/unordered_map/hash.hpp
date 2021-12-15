@@ -3,8 +3,21 @@
 #include <stddef.h>
 
 #include "unordered_map/details/config.hpp"
+#include "unordered_map/details/type.hpp"
 
 namespace wiz {
+
+    namespace details {
+        WIZ_HIDE_FROM_ABI constexpr inline u64 _moremur(u64 x) noexcept WIZ_DISABLE_UBSAN_UNSIGNED_INTEGER_CHECK {
+            x ^= x >> 27u;
+            x *= 0x3C79AC492BA7B653ull;
+            x ^= x >> 33;
+            x *= 0x1C69B3F74AC4AE35ull;
+            x ^= x >> 27;
+            return x;
+        }
+    }
+
     template <typename T>
     struct hash;
 

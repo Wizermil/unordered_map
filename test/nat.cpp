@@ -1,23 +1,23 @@
 #include "nat.hpp"
 
-int ctr = 0;
-int cpy = 0;
-int cpy_assign = 0;
-int mv = 0;
-int mv_assign = 0;
-int dtr = 0;
+std::size_t ctr = 0;
+std::size_t cpy = 0;
+std::size_t cpy_assign = 0;
+std::size_t mv = 0;
+std::size_t mv_assign = 0;
+std::size_t dtr = 0;
 
 // nat
 
 nat::nat()
-: cnt{++ctr} {
+: cnt{static_cast<signed long long>(++ctr)} {
 }
 
-nat::nat(int c0)
+nat::nat(signed long long c0)
 : cnt{c0} {
     ++ctr;
 }
-nat::nat(int c0, int c1)
+nat::nat(signed long long c0, signed long long c1)
 : cnt{c0 + c1} {
     ++ctr;
 }
@@ -41,7 +41,7 @@ nat& nat::operator=(nat&& other) noexcept {
 }
 nat::~nat() {
     ++dtr;
-    cnt = -1;
+    cnt = ~0ll;
 }
 
 // nat_no_move
@@ -60,7 +60,7 @@ nat_no_move& nat_no_move::operator=(nat_no_move const& other) noexcept {
 }
 nat_no_move::~nat_no_move() {
     ++dtr;
-    cnt = -1;
+    cnt = ~0ul;
 }
 
 // nat_no_default_ctr
@@ -76,7 +76,7 @@ nat_no_default_ctr& nat_no_default_ctr::operator=(nat_no_default_ctr const& othe
 }
 nat_no_default_ctr::~nat_no_default_ctr() {
     ++dtr;
-    cnt = -1;
+    cnt = ~0ul;
 }
 
 void reset_static_nat_counter() noexcept {

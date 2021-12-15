@@ -201,6 +201,16 @@ namespace crnlib
          return m_values.size();
       }
 
+      inline float load_factor() const noexcept
+      {
+          return static_cast<float>(m_num_valid) / m_values.size();
+      }
+
+      inline uint bucket_count() const noexcept
+      {
+          return m_values.size();
+      }
+
       inline bool empty()
       {
          return !m_num_valid;

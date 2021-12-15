@@ -1,17 +1,21 @@
 #pragma once
 
-extern int ctr;
-extern int cpy;
-extern int cpy_assign;
-extern int mv;
-extern int mv_assign;
-extern int dtr;
+#include <cstddef>
+
+#include <unordered_map/hash.hpp>
+
+extern std::size_t ctr;
+extern std::size_t cpy;
+extern std::size_t cpy_assign;
+extern std::size_t mv;
+extern std::size_t mv_assign;
+extern std::size_t dtr;
 
 struct nat {
-    int cnt;
+    signed long long cnt;
     nat();
-    explicit nat(int c0);
-    explicit nat(int c0, int c1);
+    explicit nat(signed long long c0);
+    explicit nat(signed long long c0, signed long long c1);
     nat(nat const& other) noexcept;
     nat& operator=(nat const& other) noexcept;
     nat(nat&& other) noexcept;
@@ -19,12 +23,20 @@ struct nat {
     ~nat();
 };
 
+namespace wiz {
+    template <>
+    struct hash<nat> {
+        constexpr std::size_t operator()(nat const& value) const noexcept { return static_cast<std::size_t>(value.cnt); }
+    };
+}
+
+
 constexpr bool operator==(nat const& lhs, nat const& rhs) noexcept {
     return lhs.cnt == rhs.cnt;
 }
 
 struct nat_no_move {
-    int cnt;
+    std::size_t cnt;
     nat_no_move();
     nat_no_move(nat_no_move const& other) noexcept;
     nat_no_move& operator=(nat_no_move const& other) noexcept;
@@ -32,7 +44,7 @@ struct nat_no_move {
 };
 
 struct nat_no_default_ctr {
-    int cnt;
+    std::size_t cnt;
     nat_no_default_ctr() = delete;
     nat_no_default_ctr(nat_no_default_ctr const& other) noexcept;
     nat_no_default_ctr& operator=(nat_no_default_ctr const& other) noexcept;

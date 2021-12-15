@@ -453,7 +453,7 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
             wiz::pair<int, nat> data[1000];
             for (int i = 0; i < 1000; ++i) {
                 data[i].first = i;
-                data[i].second = nat{::get_random(-1000000, 1000000)};
+                data[i].second = nat{::get_random(-1000000ll, 1000000ll)};
             }
             for (auto i = 1000 - 1; i > 0; --i) {
                 wiz::swap(data[i], data[::get_random(0, i)]);
@@ -984,7 +984,7 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
             wiz::pair<int, nat> data[20];
             for (int i = 0; i < 20; ++i) {
                 data[i].first = i;
-                data[i].second = nat{::get_random(-1000000, 1000000)};
+                data[i].second = nat{::get_random(-1000000ll, 1000000ll)};
             }
             for (auto i = 20 - 1; i > 0; --i) {
                 wiz::swap(data[i], data[::get_random(0, i)]);
@@ -1031,7 +1031,7 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
             wiz::pair<int, nat> data[20];
             for (int i = 0; i < 20; ++i) {
                 data[i].first = i;
-                data[i].second = nat{::get_random(-1000000, 1000000)};
+                data[i].second = nat{::get_random(-1000000ll, 1000000ll)};
             }
             for (auto i = 20 - 1; i > 0; --i) {
                 wiz::swap(data[i], data[::get_random(0, i)]);
@@ -1043,14 +1043,14 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
                     a.insert(p);
                 }
                 using iterator = typename TestType::iterator;
-                int remove_first = ::get_random(0, 18);
+                std::size_t remove_first = ::get_random(0ul, 18ul);
                 iterator to_remove_beg = a.begin();
-                for (int i = 1; i < remove_first; ++i) {
+                for (std::size_t i = 1; i < remove_first; ++i) {
                     ++to_remove_beg;
                 }
-                int remove_count = ::get_random(1, 19 - remove_first);
+                std::size_t remove_count = ::get_random(1ul, 19ul - remove_first);
                 iterator to_remove_last = to_remove_beg;
-                for (int i = 0; i < remove_count; ++i) {
+                for (std::size_t i = 0; i < remove_count; ++i) {
                     ++to_remove_last;
                 }
                 auto result = *to_remove_last;
@@ -1116,6 +1116,138 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
         REQUIRE(mv_assign == 0);
         REQUIRE(dtr == 20);
     }
+}
+
+TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map][nat]",
+                           (wiz::linear_probing::node_hash_map, wiz::linear_probing::flat_hash_map, wiz::robin_hood::node_hash_map, wiz::robin_hood::flat_hash_map),
+                           ((nat, int))) {
+    SECTION("void clear()") {
+        reset_static_nat_counter();
+        {
+            TestType a{{nat{10}, 10}, {nat{20}, 20}, {nat{30}, 30}, {nat{40}, 40}, {nat{50}, 50}, {nat{60}, 60}, {nat{70}, 70}, {nat{80}, 80}};
+            a.clear();
+            REQUIRE(a.size() == 0);
+
+            REQUIRE(ctr == 8);
+            REQUIRE(cpy == 8);
+            REQUIRE(cpy_assign == 0);
+            REQUIRE(mv == 0);
+            REQUIRE(mv_assign == 0);
+            REQUIRE(dtr == 16);
+        }
+        REQUIRE(ctr == 8);
+        REQUIRE(cpy == 8);
+        REQUIRE(cpy_assign == 0);
+        REQUIRE(mv == 0);
+        REQUIRE(mv_assign == 0);
+        REQUIRE(dtr == 16);
+    }
+
+    SECTION("pair<iterator, bool> insert(value_type const& value)") {
+        reset_static_nat_counter();
+        {
+            TestType a;
+            wiz::pair<nat, int> p1{nat{1}, 1};
+            auto it = a.insert(p1);
+            REQUIRE(it.second);
+            REQUIRE(it.first->first.cnt == 1);
+            REQUIRE(it.first->second == 1);
+
+            REQUIRE(ctr == 1);
+            REQUIRE(cpy == 1);
+            REQUIRE(cpy_assign == 0);
+            REQUIRE(mv == 0);
+            REQUIRE(mv_assign == 0);
+            REQUIRE(dtr == 0);
+
+            wiz::pair<nat, int> const p2{nat{2}, 2};
+            auto jt = a.insert(p2);
+            REQUIRE(jt.second);
+            REQUIRE(jt.first->first.cnt == 2);
+            REQUIRE(jt.first->second == 2);
+
+            REQUIRE(ctr == 2);
+            REQUIRE(cpy == 2);
+            REQUIRE(cpy_assign == 0);
+            REQUIRE(mv == 0);
+            REQUIRE(mv_assign == 0);
+            REQUIRE(dtr == 0);
+        }
+        REQUIRE(ctr == 2);
+        REQUIRE(cpy == 2);
+        REQUIRE(cpy_assign == 0);
+        REQUIRE(mv == 0);
+        REQUIRE(mv_assign == 0);
+        REQUIRE(dtr == 4);
+
+        reset_static_nat_counter();
+        {
+            TestType a;
+            wiz::pair<nat, int> p1{nat{1}, 1};
+            auto it = a.insert(p1);
+            REQUIRE(it.second);
+            REQUIRE(it.first->first.cnt == 1);
+            REQUIRE(it.first->second == 1);
+            wiz::pair<nat, int> p2{nat{1}, 2};
+            auto jt = a.insert(p2);
+            REQUIRE_FALSE(jt.second);
+            REQUIRE(jt.first->first.cnt == 1);
+            REQUIRE(jt.first->second == 1);
+
+            REQUIRE(ctr == 2);
+            REQUIRE(cpy == 1);
+            REQUIRE(cpy_assign == 0);
+            REQUIRE(mv == 0);
+            REQUIRE(mv_assign == 0);
+            REQUIRE(dtr == 0);
+        }
+        REQUIRE(ctr == 2);
+        REQUIRE(cpy == 1);
+        REQUIRE(cpy_assign == 0);
+        REQUIRE(mv == 0);
+        REQUIRE(mv_assign == 0);
+        REQUIRE(dtr == 3);
+
+        {
+            wiz::pair<nat, int> data[1000];
+            for (signed long long i = 0ll; i < 1000ll; ++i) {
+                data[i].first = nat{i};
+                data[i].second = ::get_random(-1000000, 1000000);
+            }
+            for (auto i = 1000 - 1; i > 0; --i) {
+                wiz::swap(data[i], data[::get_random(0, i)]);
+            }
+            reset_static_nat_counter();
+            TestType a{1000 >> 4};
+            for (auto& p : data) {
+                auto it = a.insert(p);
+                REQUIRE(it.first != a.end());
+                REQUIRE(p.second == it.first->second);
+                REQUIRE(p.first == it.first->first);
+            }
+            REQUIRE(ctr == 0);
+            REQUIRE(cpy == 1000);
+            REQUIRE(cpy_assign == 0);
+            REQUIRE(mv == 0);
+            REQUIRE(mv_assign == 0);
+            REQUIRE(dtr == 0);
+
+            for (auto& p : data) {
+                auto it = a.find(p.first);
+                REQUIRE(it != a.end());
+                REQUIRE(p.second == it->second);
+                REQUIRE(p.first == it->first);
+            }
+        }
+        REQUIRE(ctr == 0);
+        REQUIRE(cpy == 1000);
+        REQUIRE(cpy_assign == 0);
+        REQUIRE(mv == 0);
+        REQUIRE(mv_assign == 0);
+        REQUIRE(dtr == 2000);
+    }
+
+    
 }
 
 #pragma clang diagnostic pop

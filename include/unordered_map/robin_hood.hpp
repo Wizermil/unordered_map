@@ -49,9 +49,10 @@ namespace wiz::robin_hood {
         WIZ_HIDE_FROM_ABI static constexpr usize const META_ALIGN{16ul};
         WIZ_HIDE_FROM_ABI static constexpr usize const VALUE_PER_BUCKET{
             details::next_aligned(details::next_aligned(1ul, alignof(storage_type) - 1ul), META_ALIGN - 1ul)};
-        WIZ_HIDE_FROM_ABI static constexpr s8 const SEEK_MAX{32};
+        WIZ_HIDE_FROM_ABI static constexpr s8 const SEEK_MAX{VALUE_PER_BUCKET * 3};
         WIZ_HIDE_FROM_ABI static constexpr usize const MASK{VALUE_PER_BUCKET - 1ul};
         WIZ_HIDE_FROM_ABI static constexpr usize const BIT_OFFSET{__builtin_popcount(MASK)};
+        WIZ_HIDE_FROM_ABI static constexpr usize const META_SIZE{details::next_aligned(SEEK_MAX + 1ul, MASK)};
         WIZ_HIDE_FROM_ABI static constexpr usize const SIZEOF_VALUE{details::next_aligned(sizeof(storage_type), alignof(storage_type) - 1ul)};
 
         struct WIZ_HIDDEN convertible_to_value {
@@ -121,7 +122,6 @@ namespace wiz::robin_hood {
                 while (details::is_empty_or_deleted(*_dib)) {
                     ++_dib;
                     ++_value;
-                    __builtin_prefetch(_dib + 1ul);
                 }
                 if (WIZ_UNLIKELY(details::is_end(*_dib))) {
                     _dib = nullptr;
@@ -203,7 +203,7 @@ namespace wiz::robin_hood {
 
     public:
         raw_flat_hash_map() noexcept
-        : _metas{details::last_meta<VALUE_PER_BUCKET, META_ALIGN>()}
+        : _metas{details::last_meta<META_SIZE, META_ALIGN>()}
 #ifdef DEBUG
         , _values{nullptr}
 #endif
@@ -231,7 +231,7 @@ namespace wiz::robin_hood {
         , _values{other._values}
         , _capacity_minus_one{other._capacity_minus_one}
         , _size{other._size} {
-            other._metas = details::last_meta<VALUE_PER_BUCKET, META_ALIGN>();
+            other._metas = details::last_meta<META_SIZE, META_ALIGN>();
             other._capacity_minus_one = 0ul;
             other._size = 0ul;
         }
@@ -255,7 +255,7 @@ namespace wiz::robin_hood {
             _values = other._values;
             _capacity_minus_one = other._capacity_minus_one;
             _size = other._size;
-            other._metas = details::last_meta<VALUE_PER_BUCKET, META_ALIGN>();
+            other._metas = details::last_meta<META_SIZE, META_ALIGN>();
             other._capacity_minus_one = 0ul;
             other._size = 0ul;
             return *this;
@@ -290,11 +290,10 @@ namespace wiz::robin_hood {
 
         iterator find(key_type const& key) {
             usize index{_index_for_hash(hasher{}(key))};
-            for (s8 distance{0}; distance < SEEK_MAX && *(_metas + index) >= distance; ++index, ++distance) {
+            for (s8 distance{0}; *(_metas + index) >= distance; ++index, ++distance) {
                 if (policy::equal(key, _values + index)) {
                     return _iterator_at(index);
                 }
-                __builtin_prefetch(_metas + index + 1ul);
             }
             return end();
         }
@@ -333,7 +332,7 @@ namespace wiz::robin_hood {
         // modifiers
 
         void clear() {
-            for (usize index{0}, last{(_capacity_minus_one + 1ul) << BIT_OFFSET}; index < last; ++index) {
+            for (usize index{0}, last{_capacity_minus_one + 1ul + SEEK_MAX}; index < last; ++index) {
                 if (details::is_full(*(_metas + index))) {
                     _destroy_at(index);
                 }
@@ -431,8 +430,8 @@ namespace wiz::robin_hood {
             if (WIZ_UNLIKELY(first == last)) {
                 return convertible_to_iterator{first._inner._dib, first._inner._value};
             }
-            usize ind_end{last._inner._dib == nullptr ? (_capacity_minus_one + 1ul) << BIT_OFFSET : static_cast<usize>(last._inner._dib - _metas)};
-            usize current{first._inner._dib == nullptr ? (_capacity_minus_one + 1ul) << BIT_OFFSET : static_cast<usize>(first._inner._dib - _metas)};
+            usize ind_end{last._inner._dib == nullptr ? (_capacity_minus_one + 1ul + SEEK_MAX) : static_cast<usize>(last._inner._dib - _metas)};
+            usize current{first._inner._dib == nullptr ? (_capacity_minus_one + 1ul + SEEK_MAX) : static_cast<usize>(first._inner._dib - _metas)};
             assert(current <= ind_end);
             for (; current != ind_end; ++current) {
                 if (details::is_full(*(_metas + current))) {
@@ -479,7 +478,7 @@ namespace wiz::robin_hood {
 
         constexpr size_type bucket_count() const {
             if (WIZ_LIKELY(_is_init())) {
-                return _capacity_minus_one + 1ul;
+                return (_capacity_minus_one + 1ul) >> BIT_OFFSET;
             } else {
                 return 0ul;
             }
@@ -489,9 +488,9 @@ namespace wiz::robin_hood {
 
         float load_factor() const {
             if (WIZ_LIKELY(_is_init())) {
-                return static_cast<float>(_size) / ((_capacity_minus_one + 1ul) << BIT_OFFSET);
+                return static_cast<float>(_size) / (_capacity_minus_one + 1ul + SEEK_MAX);
             } else {
-                return 0.f;
+                return 1.f;
             }
         }
 
@@ -500,7 +499,7 @@ namespace wiz::robin_hood {
         void reserve(size_type new_cap) { rehash(new_cap); }
         void rehash(size_type new_cap) {
             if (new_cap > bucket_count()) {
-                _grow(details::bit::ceil2(new_cap));
+                _grow(wiz::max(16ul, details::bit::ceil2(new_cap << BIT_OFFSET)));
             }
         }
 
@@ -538,35 +537,36 @@ namespace wiz::robin_hood {
         WIZ_HIDE_FROM_ABI constexpr usize _recommended_capacity(usize size) const noexcept { return (size + MASK) >> BIT_OFFSET; }
 
         WIZ_HIDE_FROM_ABI constexpr usize _index_for_hash(usize hash) const noexcept {
-            usize const bucket_num{(hash >> BIT_OFFSET) & _capacity_minus_one};
-            return (bucket_num << BIT_OFFSET) + (hash & MASK);
-            //            usize const bucket_num{hash & _capacity_minus_one};
-            //            return (bucket_num << BIT_OFFSET) + static_cast<usize>((static_cast<u64>(hash) * 11400714819323198485ull) >> 60ull);
+//            u32 const shift = 8u * sizeof(usize) - static_cast<u32>(__builtin_popcountll(_capacity_minus_one));
+//            hash ^= hash >> 32u;
+//            hash *= 11400714819323198485llu;
+//            return hash >> shift;
+            return hash & _capacity_minus_one;
         }
 
-        WIZ_HIDE_FROM_ABI inline bool _is_init() const noexcept { return _metas != details::last_meta<VALUE_PER_BUCKET, META_ALIGN>(); }
+        WIZ_HIDE_FROM_ABI constexpr bool _is_init() const noexcept { return _capacity_minus_one != 0; }
 
         template <typename Key, typename... Args>
         WIZ_HIDE_FROM_ABI WIZ_NOINLINE pair<iterator, bool> _emplace(Key&& key, Args&&... args) noexcept {
             usize index{_index_for_hash(policy::hash(key))};
             s8 distance{0};
-            for (; distance < SEEK_MAX && *(_metas + index) >= distance; ++distance, ++index) {
-                if (policy::equal(key, *(_values + index))) {
+            for (; *(_metas + index) >= distance; ++index, ++distance) {
+                if (WIZ_UNLIKELY(policy::equal(key, _values + index))) {
                     return {_iterator_at(index), false};
                 }
-                __builtin_prefetch(_metas + index + 1ul);
+                assert(distance != 127);
             }
             return _emplace_new(distance, index, wiz::forward<Key>(key), wiz::forward<Args>(args)...);
         }
 
         template <typename Key, typename... Args>
-        WIZ_HIDE_FROM_ABI pair<iterator, bool> _emplace_new(s8 distance_from_desired, usize index, Key&& key, Args&&... args) noexcept {
+        WIZ_HIDE_FROM_ABI inline pair<iterator, bool> _emplace_new(s8 distance_from_desired, usize index, Key&& key, Args&&... args) noexcept {
             if (WIZ_LIKELY(details::is_empty_or_deleted(*(_metas + index)))) {
                 _placement_new_at(index, distance_from_desired, wiz::forward<Key>(key), wiz::forward<Args>(args)...);
                 ++_size;
                 return {_iterator_at(index), true};
             } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
-                _grow(wiz::max(1ul, (_capacity_minus_one + 1ul) << 1ul));
+                _grow(wiz::max(16ul, (_capacity_minus_one + 1ul) << 1ul));
                 return _emplace(wiz::forward<Key>(key), wiz::forward<Args>(args)...);
             }
 
@@ -575,6 +575,7 @@ namespace wiz::robin_hood {
             wiz::swap(to_insert, *(_values + index));
             usize const result{index};
             ++index;
+            assert(distance_from_desired != 127);
             ++distance_from_desired;
 
             while (true) {
@@ -584,15 +585,16 @@ namespace wiz::robin_hood {
                     return {_iterator_at(result), true};
                 } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
                     wiz::swap(to_insert, *(_values + result));
-                    _grow(wiz::max(1ul, (_capacity_minus_one + 1ul) << 1ul));
+                    _grow(wiz::max(16ul, (_capacity_minus_one + 1ul) << 1ul));
                     return _emplace(wiz::move(to_insert));
                 } else if (*(_metas + index) < distance_from_desired) {
                     wiz::swap(distance_from_desired, *(_metas + index));
                     wiz::swap(to_insert, *(_values + index));
+                    assert(distance_from_desired != 127);
                     ++distance_from_desired;
                     ++index;
                 } else {
-                    __builtin_prefetch(_metas + index + 1ul);
+                    assert(distance_from_desired != 127);
                     ++distance_from_desired;
                     ++index;
                 }
@@ -603,9 +605,10 @@ namespace wiz::robin_hood {
         WIZ_HIDE_FROM_ABI inline void _grow(size_type new_cap) noexcept {
             assert(new_cap > 0ul || (new_cap & (new_cap - 1ul)) != 0ul);
             size_type new_cap_minus_one{new_cap - 1ul};
-            new_cap = (new_cap << BIT_OFFSET);
+            new_cap = new_cap + SEEK_MAX;
             s8* metas = static_cast<s8*>(details::memalign((SIZEOF_VALUE + 1ul) * new_cap + VALUE_PER_BUCKET, META_ALIGN));
             storage_type* values{reinterpret_cast<storage_type*>(metas + new_cap + VALUE_PER_BUCKET)};
+            assert((reinterpret_cast<uptr>(values) & ~MASK) != 0ul);
             details::fill(metas, metas + new_cap, details::flag::EMPTY);
             details::fill(metas + new_cap, metas + new_cap + VALUE_PER_BUCKET, details::flag::END);
             bool const is_init{_is_init()};
@@ -614,15 +617,13 @@ namespace wiz::robin_hood {
             wiz::swap(_capacity_minus_one, new_cap_minus_one);
             _size = 0ul;
             if (is_init) {
-                for (usize index{0ul}, last{(new_cap_minus_one + 1ul) << BIT_OFFSET}; index < last; ++index) {
+                for (usize index{0ul}, last{new_cap_minus_one + 1ul + SEEK_MAX}; index < last; ++index) {
                     if (details::is_full(*(metas + index))) {
                         _emplace(wiz::move(*(values + index)));
-
                         *(metas + index) = details::flag::DELETED;
                         if constexpr (!policy::is_node) {
                             policy::destruct_in_place(values + index);
                         }
-                        __builtin_prefetch(metas + index + 1ul);
                     }
                 }
                 ::free(metas);
@@ -631,11 +632,10 @@ namespace wiz::robin_hood {
 
         WIZ_HIDE_FROM_ABI inline void _destroy() noexcept {
             if (WIZ_LIKELY(_is_init())) {
-                for (usize index{0}, last{(_capacity_minus_one + 1ul) << BIT_OFFSET}; index < last; ++index) {
+                for (usize index{0}, last{_capacity_minus_one + 1ul + SEEK_MAX}; index < last; ++index) {
                     if (details::is_full(*(_metas + index))) {
                         _destroy_at(index);
                     }
-                    __builtin_prefetch(_metas + index + 1ul);
                 }
                 ::free(_metas);
             }
