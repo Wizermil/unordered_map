@@ -2,9 +2,9 @@
 
 #include <assert.h>
 
+#include "unordered_map/details/algorithm/lower_bound.hpp"
 #include "unordered_map/details/config.hpp"
 #include "unordered_map/details/type.hpp"
-#include "unordered_map/details/algorithm/lower_bound.hpp"
 
 namespace wiz::details {
 

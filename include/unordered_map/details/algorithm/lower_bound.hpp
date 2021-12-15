@@ -1,8 +1,8 @@
 #pragma once
 
-#include "unordered_map/details/type.hpp"
 #include "unordered_map/details/config.hpp"
 #include "unordered_map/details/functional/less.hpp"
+#include "unordered_map/details/type.hpp"
 
 namespace wiz {
     namespace details {
