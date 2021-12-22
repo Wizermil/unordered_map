@@ -502,6 +502,20 @@ namespace wiz::robin_hood {
                 _grow(wiz::max(16ul, details::bit::ceil2(new_cap << BIT_OFFSET)));
             }
         }
+        void shrink_to_fit() {
+            if (WIZ_UNLIKELY(_size == 0ul)) {
+                if (WIZ_LIKELY(_is_init())) {
+                    ::free(_metas);
+                    _metas = details::last_meta<META_SIZE, META_ALIGN>();
+                    _capacity_minus_one = 0ul;
+                }
+            } else {
+                usize const new_cap = wiz::max(16ul, details::bit::ceil2(_size));
+                if ((new_cap - 1ul) < _capacity_minus_one) {
+                    _grow(new_cap);
+                }
+            }
+        }
 
         friend bool operator==(raw_flat_hash_map const& lhs, raw_flat_hash_map const& rhs) {
             if (lhs.size() != rhs.size()) {
