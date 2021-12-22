@@ -24,7 +24,7 @@ namespace wiz {
 #define WIZ_HASH_SPECIALIZE_BY_VALUE(type)                                                            \
     template <>                                                                                       \
     struct hash<type> {                                                                               \
-        constexpr size_t operator()(type value) const noexcept { return static_cast<size_t>(value); } \
+        constexpr size_t operator()(type value) const noexcept { return static_cast<size_t>(details::_moremur(static_cast<u64>(value))); } \
     };
 
     WIZ_HASH_SPECIALIZE_BY_VALUE(bool)
@@ -44,9 +44,8 @@ namespace wiz {
 
     template <typename T>
     struct hash<T*> {
-        WIZ_HIDE_FROM_ABI size_t operator()(T* value) const noexcept {
-            size_t const x = reinterpret_cast<size_t>(value);
-            return x + (x >> 3);
+        WIZ_HIDE_FROM_ABI inline size_t operator()(T* value) const noexcept {
+            return static_cast<size_t>(details::_moremur(reinterpret_cast<u64>(value)));
         }
     };
 } // namespace wiz
