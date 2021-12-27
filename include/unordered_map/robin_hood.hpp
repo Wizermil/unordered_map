@@ -499,7 +499,7 @@ namespace wiz::robin_hood {
         void reserve(size_type new_cap) { rehash(new_cap); }
         void rehash(size_type new_cap) {
             if (new_cap > bucket_count()) {
-                _grow(wiz::max(16ul, details::bit::ceil2(new_cap << BIT_OFFSET)));
+                _grow(wiz::max(static_cast<usize>(16u), details::bit::ceil2(new_cap << BIT_OFFSET)));
             }
         }
         void shrink_to_fit() {
@@ -511,7 +511,7 @@ namespace wiz::robin_hood {
                     _capacity_minus_one = 0ul;
                 }
             } else {
-                usize const new_cap = wiz::max(16ul, details::bit::ceil2(_size));
+                usize const new_cap = wiz::max(static_cast<usize>(16u), details::bit::ceil2(_size));
                 if ((new_cap - 1ul) < _capacity_minus_one) {
                     _grow(new_cap);
                 }
@@ -581,7 +581,7 @@ namespace wiz::robin_hood {
                 ++_size;
                 return {_iterator_at(index), true};
             } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
-                _grow(wiz::max(16ul, (_capacity_minus_one + 1ul) << 1ul));
+                _grow(wiz::max(static_cast<usize>(16u), (_capacity_minus_one + 1ul) << 1ul));
                 return _emplace(wiz::forward<Key>(key), wiz::forward<Args>(args)...);
             }
 
@@ -600,7 +600,7 @@ namespace wiz::robin_hood {
                     return {_iterator_at(result), true};
                 } else if (details::is_end(*(_metas + index)) || distance_from_desired >= SEEK_MAX) {
                     wiz::swap(to_insert, *(_values + result));
-                    _grow(wiz::max(16ul, (_capacity_minus_one + 1ul) << 1ul));
+                    _grow(wiz::max(static_cast<usize>(16u), (_capacity_minus_one + 1ul) << 1ul));
                     return _emplace(wiz::move(to_insert));
                 } else if (*(_metas + index) < distance_from_desired) {
                     wiz::swap(distance_from_desired, *(_metas + index));
