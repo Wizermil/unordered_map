@@ -507,6 +507,7 @@ namespace wiz::robin_hood {
                 if (WIZ_LIKELY(_is_init())) {
                     ::free(_metas);
                     _metas = details::last_meta<META_SIZE, META_ALIGN>();
+                    _values = nullptr;
                     _capacity_minus_one = 0ul;
                 }
             } else {
