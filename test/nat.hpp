@@ -2,6 +2,7 @@
 
 #include <cstddef>
 
+#include "helper/hash.hpp"
 #include <unordered_map/hash.hpp>
 
 extern std::size_t ctr;
@@ -26,6 +27,11 @@ struct nat {
 namespace wiz {
     template <>
     struct hash<nat> {
+        constexpr std::size_t operator()(nat const& value) const noexcept { return static_cast<std::size_t>(wiz::hash<signed long long>{}(value.cnt)); }
+    };
+
+    template <>
+    struct nohash<nat> {
         constexpr std::size_t operator()(nat const& value) const noexcept { return static_cast<std::size_t>(value.cnt); }
     };
 }

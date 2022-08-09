@@ -278,6 +278,9 @@
 		222C910824740B1500FEED58 /* equal_to.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = equal_to.hpp; sourceTree = "<group>"; };
 		222EBCD72760CF30006F230F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		222EBCDD2760EAF2006F230F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		223F800D28A2B6EA005783D0 /* hash.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
+		223F800E28A2B786005783D0 /* robin_hood.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = robin_hood.hpp; sourceTree = "<group>"; };
+		223F800F28A2B795005783D0 /* linear_probing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = linear_probing.hpp; sourceTree = "<group>"; };
 		224C160D25C1A732000E1FF4 /* libios_crunch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libios_crunch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		224C160F25C1A732000E1FF4 /* ios_crunch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_crunch.h; sourceTree = "<group>"; };
 		224C161025C1A732000E1FF4 /* ios_crunch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ios_crunch.m; sourceTree = "<group>"; };
@@ -538,6 +541,7 @@
 		2221BE9F22D8B7DF00A3098E /* test */ = {
 			isa = PBXGroup;
 			children = (
+				223F800C28A2B6DA005783D0 /* helper */,
 				228CC168246CADFC00BFED85 /* construct.cpp */,
 				2292E7C0247C7DAF005B9ACF /* iterators.cpp */,
 				228BA23A248AA005003E3E54 /* lookup.cpp */,
@@ -557,6 +561,16 @@
 				22DEE61924687CD100C8596D /* unordered_map */,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		223F800C28A2B6DA005783D0 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				223F800D28A2B6EA005783D0 /* hash.hpp */,
+				223F800E28A2B786005783D0 /* robin_hood.hpp */,
+				223F800F28A2B795005783D0 /* linear_probing.hpp */,
+			);
+			path = helper;
 			sourceTree = "<group>";
 		};
 		224C160E25C1A732000E1FF4 /* ios_crunch */ = {
@@ -950,7 +964,7 @@
 		22A0675D22D8AD8500420C6D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					2221BDFA22D8AF4000A3098E = {
 						CreatedOnToolsVersion = 11.0;
@@ -1274,10 +1288,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/benchmark/include\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1290,10 +1306,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/benchmark/include\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1309,6 +1327,7 @@
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/benchmark/include\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1325,6 +1344,7 @@
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/benchmark/include\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1339,6 +1359,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1351,6 +1372,7 @@
 					"\"$(SRCROOT)/../lib/abseil\"",
 					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1363,6 +1385,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1375,6 +1398,7 @@
 					"\"$(SRCROOT)/../lib/abseil\"",
 					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1398,6 +1422,7 @@
 					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				INFOPLIST_FILE = ios_benchmark/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.prettysimple.ios-benchmark";
@@ -1423,6 +1448,7 @@
 					"\"$(SRCROOT)/../lib/crunch/crnlib\"",
 				);
 				INFOPLIST_FILE = ios_benchmark/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.prettysimple.ios-benchmark";
@@ -1453,6 +1479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.prettysimple.ios-test";
@@ -1480,6 +1507,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.prettysimple.ios-test";
@@ -1497,6 +1525,7 @@
 				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_NULLABILITY = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
@@ -1506,6 +1535,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../test\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1519,6 +1549,7 @@
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MWLR2HTMFW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
@@ -1528,6 +1559,7 @@
 					"\"$(SRCROOT)/../include\"",
 					"\"$(SRCROOT)/../test\"",
 				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1542,6 +1574,7 @@
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1557,6 +1590,7 @@
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1569,10 +1603,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1585,10 +1621,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/crunch/crnlib\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1601,10 +1639,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/abseil\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1617,10 +1657,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				EXECUTABLE_PREFIX = lib;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/abseil\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1636,6 +1678,7 @@
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/abseil\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1651,6 +1694,7 @@
 				DEVELOPMENT_TEAM = EA7S9957EF;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../lib/abseil\"";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1692,6 +1736,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1778,6 +1823,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

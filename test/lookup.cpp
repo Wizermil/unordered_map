@@ -6,13 +6,13 @@
 #include <string>
 
 #include "nat.hpp"
-#include <unordered_map/linear_probing.hpp>
-#include <unordered_map/robin_hood.hpp>
+#include "helper/linear_probing.hpp"
+#include "helper/robin_hood.hpp"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
 TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map lookup", "[flat_hash_map]",
-                           (wiz::linear_probing::node_hash_map, wiz::linear_probing::flat_hash_map, wiz::robin_hood::node_hash_map, wiz::robin_hood::flat_hash_map),
+                           (wiz::linear_probing::test::node_hash_map, wiz::linear_probing::test::flat_hash_map, wiz::robin_hood::test::node_hash_map, wiz::robin_hood::test::flat_hash_map),
                            ((int, int))) {
     SECTION("iterator find(key_type const &key) noexcept") {
         {
@@ -101,7 +101,7 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map lookup", "[flat_hash_map]",
 }
 
 TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map lookup", "[flat_hash_map][nat]",
-                           (wiz::linear_probing::node_hash_map, wiz::linear_probing::flat_hash_map, wiz::robin_hood::node_hash_map, wiz::robin_hood::flat_hash_map),
+                           (wiz::linear_probing::test::node_hash_map, wiz::linear_probing::test::flat_hash_map, wiz::robin_hood::test::node_hash_map, wiz::robin_hood::test::flat_hash_map),
                            ((int, nat))) {
     SECTION("iterator find(key_type const &key) noexcept") {
         reset_static_nat_counter();

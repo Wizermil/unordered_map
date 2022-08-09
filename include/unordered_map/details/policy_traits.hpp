@@ -22,9 +22,12 @@ namespace wiz::details {
         static constexpr bool const is_node = true;
 
         WIZ_HIDE_FROM_ABI static inline reference indirection(storage_type* a) noexcept {
+            __builtin_assume(a != nullptr);
+            __builtin_assume(*a != nullptr);
             return **a;
         }
         WIZ_HIDE_FROM_ABI static inline pointer addressof(storage_type* a) noexcept {
+            __builtin_assume(a != nullptr);
             return *a;
         }
 
@@ -94,6 +97,7 @@ namespace wiz::details {
         static constexpr bool const is_node = false;
 
         WIZ_HIDE_FROM_ABI static inline reference indirection(storage_type* a) noexcept {
+            __builtin_assume(a != nullptr);
             return *a;
         }
         WIZ_HIDE_FROM_ABI static inline pointer addressof(storage_type* a) noexcept {

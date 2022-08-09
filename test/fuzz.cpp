@@ -3,10 +3,9 @@
 #include <catch2/catch.hpp>
 #pragma clang diagnostic pop
 
-#include <unordered_map/linear_probing.hpp>
-#include <unordered_map/robin_hood.hpp>
-
 #include "nat.hpp"
+#include "helper/linear_probing.hpp"
+#include "helper/robin_hood.hpp"
 
 #include <cstddef>
 #include <random>
@@ -24,7 +23,7 @@ static inline T get_random(T a, T b) noexcept {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
 TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map]",
-                           (wiz::linear_probing::node_hash_map, wiz::linear_probing::flat_hash_map, wiz::robin_hood::node_hash_map, wiz::robin_hood::flat_hash_map),
+                           (wiz::linear_probing::test::node_hash_map, wiz::linear_probing::test::flat_hash_map, wiz::robin_hood::test::node_hash_map, wiz::robin_hood::test::flat_hash_map),
                            ((signed long long, nat))) {
 
     // test mix
@@ -87,7 +86,7 @@ TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map modifiers", "[flat_hash_map]",
 }
 
 TEMPLATE_PRODUCT_TEST_CASE("flat_hash_map distrib", "[flat_hash_map]",
-                           (wiz::robin_hood::flat_hash_map),
+                           (wiz::robin_hood::test::flat_hash_map),
                            ((signed long long, nat))) {
 
     
