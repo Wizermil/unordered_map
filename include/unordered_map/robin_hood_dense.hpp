@@ -333,13 +333,15 @@ namespace wiz::robin_hood {
         // modifiers
 
         void clear() {
-            for (usize index{0}, last{_capacity}; index < last; ++index) {
-                if (details::is_full(*(_metas + index))) {
-                    _destroy_at(index);
+            if (_size > 0ul) {
+                for (usize index{0}, last{_capacity}; index < last; ++index) {
+                    if (details::is_full(*(_metas + index))) {
+                        _destroy_at(index);
+                    }
+                    __builtin_prefetch(_metas + index + 1ul);
                 }
-                __builtin_prefetch(_metas + index + 1ul);
+                _size = 0ul;
             }
-            _size = 0ul;
         }
 
         pair<iterator, bool> insert(value_type const& value) { return _emplace(value); }
