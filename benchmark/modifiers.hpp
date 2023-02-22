@@ -122,7 +122,7 @@ namespace wiz {
             data = new T{defaultdata};
             state.ResumeTiming();
 
-            benchmark::DoNotOptimize(data->clear());
+            data->clear();
         }
 
         if constexpr (has_load_factor) {

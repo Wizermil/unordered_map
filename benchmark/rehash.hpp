@@ -38,7 +38,7 @@ namespace wiz {
                 data->insert({rnd[i], static_cast<int>(i)});
             }
             state.ResumeTiming();
-            benchmark::DoNotOptimize(data->rehash(32));
+            data->rehash(32);
         }
         delete data;
         state.counters["itr"] = benchmark::Counter(state.iterations(), benchmark::Counter::kIsRate);
