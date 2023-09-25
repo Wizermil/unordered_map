@@ -303,7 +303,7 @@ namespace elixir {
 
         bool insert(const ValueType& value) { return addEntry(value); }
 
-        bool insert(ValueType&& value) { return addEntry(move(value)); }
+        bool insert(ValueType&& value) { return addEntry(std::move(value)); }
 
         void insert(std::initializer_list<ValueType> list) { insert(list.begin(), list.end()); }
 
@@ -464,7 +464,7 @@ namespace elixir {
             const size_t index = hasher{}(value.first) % _buckets.size();
             Entry* entry = _buckets[index];
             if (entry == nullptr) {
-                _buckets[index] = new Entry{forward<P>(value), nullptr};
+                _buckets[index] = new Entry{std::forward<P>(value), nullptr};
                 ++_size;
                 return true;
             }
@@ -477,7 +477,7 @@ namespace elixir {
             if (key_equal{}(entry->kv.first, value.first)) {
                 return false;
             } else {
-                entry->next = new Entry{forward<P>(value), nullptr};
+                entry->next = new Entry{std::forward<P>(value), nullptr};
                 ++_size;
                 return true;
             }

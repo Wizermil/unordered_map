@@ -40,7 +40,6 @@ namespace wiz {
     }
 
     std::uint32_t getUnsignedInt32InRange(std::uint32_t min, std::uint32_t max) {
-        assert(min <= max); // max should be greater than min
         return min + getBoundedUnsignedInt32(max - min);
     }
 
